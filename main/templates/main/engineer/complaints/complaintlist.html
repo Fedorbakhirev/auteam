@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Жалобы{% endblock %}
+{% block content %}
+    <div class="content">
+        <div class="application">
+            <div class="container">
+                <div class="application__item">.
+                    {% if complaints %}
+                        <div class="application-title">
+                            Ожидают ответа:
+                        </div>
+                        <div class="application_inner">
+                            {% for complaint in complaints %}
+                                <div class="application-card">
+                                    <div class="application-card__header">
+                                        <div class="title">
+                                            {{ complaint.user.first_name }}
+                                        </div>
+                                        <div class="date">
+                                            {{ complaint.created_at|date:'d, F, Y' }}
+                                        </div>
+                                    </div>
+                                    <div class="text">
+                                        {{ complaint.subject }}
+                                    </div>
+                                    <a class="btn btn-orange" href="{% url 'main:complaints_reply' complaint.id %}">
+                                        Ответить
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="application-title">
+                            Нет активных жалоб
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Реквизиты{% endblock %}
+{% block content %}
+    <div class="content">
+
+        <div class="profile">
+            <div class="container">
+                <div class="profile__inner">
+                    <div class="profile-left">
+                        <div class="profile-title">
+                            Реквизиты
+                        </div>
+                        <div class="profile-title">
+                            К оплате {{ tariff.tariff.price }}р
+                        </div>
+
+                    </div>
+                    <div class="profile-right">
+                        <div class="requisites">
+                            <div class="requisites__inner">
+                                <div class="requisites-block">
+                                    <div class="title">
+                                        Рассчетный счет
+                                    </div>
+                                    <div class="text">
+                                        р/сч 40702810038180132605<br>
+                                        к/сч 30101810400000000225
+                                    </div>
+                                </div>
+                                <div class="requisites-block">
+                                    <div class="title">
+                                        БИК
+                                    </div>
+                                    <div class="text">
+                                        044525225
+                                    </div>
+                                </div>
+                                <div class="requisites-block">
+                                    <div class="title">
+                                        КПП
+                                    </div>
+                                    <div class="text">
+                                        770545001
+                                    </div>
+                                </div>
+
+                                <a href="{% url 'main:pay' %}" class="btn btn-phiolet">Оплатил</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Инженер{% endblock %}
+{% block content %}
+    <div class="content">
+        <div class="profile engineer">
+            <div class="container">
+                <div class="profile__inner">
+                    <div class="profile-left">
+                        <div class="profile-title">
+                            Люди вас ждут!
+                        </div>
+                    </div>
+                    <div class="profile-right">
+                        <div class="profile-info">
+                            <div class="profile-info__inner">
+                                <div class="title">
+                                    Ваш профиль
+                                </div>
+                                <div class="hello">
+                                    Здравствуйте, {{ profile.first_name }}
+                                </div>
+                                <div class="lastname">
+                                    {{ profile.last_name }}
+                                </div>
+                                <div class="phone">
+                                    {{ profile.usertariff.phone_number }}
+                                </div>
+                                <div class="error">
+                                </div>
+                                <a href="{% url 'main:connetion_requests' %}" class="btn btn-phiolet">Ответить на заявки</a>
+                                <a href="{% url 'main:complaints_list' %}" class="btn btn-orange">Ответить на жалобы</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

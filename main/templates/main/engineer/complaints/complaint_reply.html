@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Жалоба №{{ complaint.id }}{% endblock %}
+{% block content %}
+    <div class="content">
+        <div class="container">
+            <div class="form-request-container">
+                <form action="#" method="POST" class="form-request">
+                    {% csrf_token %}
+                    <div class="date">
+                        Дата: {{ complaint.created_at|date:'d.m.Y' }}
+                    </div>
+                    <div class="title">
+                        Жалоба №{{ complaint.id }}
+                    </div>
+                    <div class="info">
+                        <div class="from">
+                            От: {{ complaint.user.first_name }} {{ complaint.user.last_name }}
+                        </div>
+                        <div class="subject">
+                            Тема: {{ complaint.subject }}
+                        </div>
+                    </div>
+                    <div class="message-block">
+                        <div class="message-title">
+                            Сообщение:
+                        </div>
+                        <div class="message-text">
+                            {{ complaint.desc }}
+                        </div>
+                    </div>
+                    <textarea name="answer" id="" cols="30" rows="10"
+                              placeholder="Напишите ответ на проблему"></textarea>
+                    <input type="submit" class="btn btn-orange" value="Ответить">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

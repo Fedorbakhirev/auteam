@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Регистрация
+{% endblock %}
+
+{% block content %}
+    <div class="auth">
+        <div class="container">
+            <div class="auth__inner">
+                <div class="no-acc">
+                    <div class="no-acc__inner">
+                        <div class="text">
+                            Есть аккаунт?
+                        </div>
+                        <div class="title">
+                            Авторизуйтесь на платформе
+                        </div>
+                        <a class="btn" href="{% url 'main:auth' %}">
+                            Войти в аккаунт
+                        </a>
+                    </div>
+                </div>
+                <div class="form-container">
+                    <form class="form-auth" method="POST" action="#">
+                        {% csrf_token %}
+                        <div class="text">
+                            Нет аккаунта?
+                        </div>
+                        <div class="title">
+                            Пройдите регистрацию
+                        </div>
+                        {% for f in form %}
+                            {{ f }}
+                        {% endfor %}
+                        <input type="submit" class="btn-orange" value="Зарегистрироваться">
+                        {% for f in form %}
+                            {% for error in f.errors %}
+                                <div class="error">{{ error }}</div><br>
+                            {% endfor %}
+                        {% endfor %}
+                        {% for error in form.non_field_errors %}
+                            <div class="error">{{ error }}</div>
+                        {% endfor %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

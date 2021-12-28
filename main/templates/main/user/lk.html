@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Личный кабинет{% endblock %}
+{% block content %}
+    <div class="content">
+        <div class="profile">
+            <div class="container">
+                <div class="profile__inner">
+                    <div class="profile-left">
+                        {% if profile.tariff %}
+                            <div class="profile-title">
+                                Активный тариф
+                            </div>
+                            <div class="request-card">
+                                <div class="title">
+                                    {{ profile.tariff.title }}
+                                </div>
+                                <div class="adv">
+                                    <img src="{% static 'images/web.png' %}" alt=""><span>{{ profile.tariff.speed }} Мбит/с</span>
+                                </div>
+                                <div class="adv">
+                                    <img src="{% static 'images/cloud.png' %}" alt=""><span>{{ profile.tariff.cloud }} гб облачного хранилища</span>
+                                </div>
+                                <div class="desc">
+                                    {{ profile.tariff.desc }}
+                                </div>
+                                <div class="price">
+                                    {{ profile.tariff.price }}Р
+                                </div>
+                                {% if profile.is_active %}
+                                    <a class="btn-card btn-orange" href="{% url 'main:remove_tariff' %}">
+                                        Отключить
+                                    </a>
+                                {% else %}
+                                    <a class="off">
+                                        Ожидает активации
+                                    </a>
+                                {% endif %}
+                            </div>
+                        {% else %}
+                            <div class="profile-title">
+                                Нет активного тарифа
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="profile-right">
+                        <div class="profile-info">
+                            <div class="profile-info__inner">
+                                <div class="title">
+                                    Ваш профиль
+                                </div>
+                                <div class="hello">
+                                    Здравствуйте, {{ profile.user.first_name }}
+                                </div>
+                                <div class="lastname">
+                                    {{ profile.user.last_name }}
+                                </div>
+                                <div class="phone">
+                                    {{ profile.phone_number }}
+                                </div>
+                                {% if profile.tariff and profile.is_active %}
+                                    {% now "Y-m-d" as todays_date %}
+                                    {% if profile.is_paid|date:"Y-m-d" < todays_date %}
+                                        <div class="error">
+                                            Ожидается оплата
+                                        </div>
+                                    {% else %}
+                                        <div class="error">
+                                            Оплачено до {{ profile.is_paid }}
+                                        </div>
+                                    {% endif %}
+                                    <a href="{% url 'main:view_requisites' %}" class="btn btn-phiolet">Оплатить</a>
+                                {% else %}
+                                    <div class="error">
+                                        Нет активного тарифа
+                                    </div>
+                                {% endif %}
+                                <a href="{% url 'main:addcomplaint' %}" class="btn btn-orange">Оставить жалобу</a>
+                                <a href="{% url 'main:complaints_history' %}" class="btn btn-grey">История жалоб</a>
+                                <a href="{% url 'main:tariffs_history' %}" class="btn btn-grey">История тарифов</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

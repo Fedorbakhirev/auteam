@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Авторизация
+{% endblock %}
+
+{% block content %}
+    <div class="auth">
+        <div class="container">
+            <div class="auth__inner">
+                <div class="no-acc">
+                    <div class="no-acc__inner">
+                        <div class="text">
+                            Все ещё нет аккаунта?
+                        </div>
+                        <div class="title">
+                            Пройдите быструю регистрацию
+                        </div>
+                        <a class="btn" href="{% url 'main:register' %}">
+                            Это абсолютно бесплатно
+                        </a>
+                    </div>
+                </div>
+                <div class="form-container">
+                    <form class="form-auth" method="POST" action="#">
+                        {% csrf_token %}
+                        <div class="text">
+                            Есть аккаунт?
+                        </div>
+                        <div class="title">
+                            Произведите вход
+                        </div>
+                        <input type="text" name="username" id="" placeholder="Логин">
+                        <input type="password" name="password" id="" placeholder="Пароль">
+                        <input type="submit" class="btn-orange" value="Авторизоваться">
+                        {% for error in form.non_field_errors %}
+                            <div class="error">{{ error }}</div>
+                        {% endfor %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

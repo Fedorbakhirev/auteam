@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Заявка пользователя {{ card.user.username }}{% endblock %}
+{% block content %}
+    <div class="content">
+        <div class="container">
+            <div class="form-request-container">
+                <form action="#" method="POST" class="form-request">
+                    {% csrf_token %}
+                    <div class="title">
+                        Заявка на тариф
+                    </div>
+                    <div class="info">
+                        <div class="from">
+                            От: {{ card.user.first_name }} {{ card.user.last_name }}
+                        </div>
+                        <div class="phone">
+                            Номер телефона: {{ card.phone_number }}
+                        </div>
+                        <div class="tariff">
+                            Тариф: {{ card.tariff }}
+                        </div>
+                    </div>
+
+                    <textarea name="desc" id="" cols="30" rows="10" placeholder="Причина отмены"></textarea>
+
+                    <div class="btn-container">
+                        <a href="{% url 'main:request_accept' card.id %}" class="btn btn-phiolet">Активировать</a>
+                        <input type="submit" class="btn btn-orange" value="Отклонить">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

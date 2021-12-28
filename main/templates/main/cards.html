@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Тарифы{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="request">
+            {% for tariff in tariffs %}
+                <div class="request-card">
+                    <div class="title">
+                        {{ tariff.title }}
+                    </div>
+                    <div class="adv">
+                        <img src="{% static 'images/web.png' %}" alt=""><span>{{ tariff.speed }} Мбит/с</span>
+                    </div>
+                    <div class="adv">
+                        <img src="{% static 'images/cloud.png' %}"
+                             alt=""><span>{{ tariff.cloud }} гб облачного хранилища</span>
+                    </div>
+                    <div class="desc">
+                        {{ tariff.desc }}
+                    </div>
+                    <div class="price">
+                        {{ tariff.price }}Р
+                    </div>
+
+                    {% if tariff.is_promotion %}
+                        <a class="btn-card btn-phiolet" href="{% url 'main:get_tariff' tariff.id%}">
+                            Подключить по акции
+                        </a>
+                    {% else %}
+                        <a class="btn-card btn-orange" href="{% url 'main:get_tariff' tariff.id%}">
+                            Подключить
+                        </a>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}История тарифов{% endblock %}
+{% block content %}
+    <div class="content">
+        <div class="container">
+
+            {% if history %}
+                <div class="small-title tariff-history-title">
+                    История тарифов
+                </div>
+
+                <div class="request">
+                    {% for tariff in history %}
+                        <div class="request-card">
+                            <div class="title">
+                                {{ tariff.tariff.title }}
+                            </div>
+                            <div class="adv">
+                                <img src="{% static 'images/web.png' %}"
+                                     alt=""><span>{{ tariff.tariff.speed }} Мбит/с</span>
+                            </div>
+                            <div class="adv">
+                                <img src="{% static 'images/cloud.png' %}" alt=""><span>{{ tariff.tariff.cloud }} гб облачного хранилища</span>
+                            </div>
+                            <div class="desc">
+                                {{ tariff.tariff.desc }}
+                            </div>
+                            <div class="price">
+                                {{ tariff.tariff.price }}Р
+                            </div>
+                            {% if tariff.is_declined %}
+                                <a class="error tariff-history-link" href="{% url 'main:view_decline' tariff.id %}">
+                                    Причина отклонения
+                                </a>
+                            {% else %}
+                                <a class="off">
+                                    Отключено {{ tariff.disabled_at|date:"d.m.Y" }}
+                                </a>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="small-title tariff-history-title">
+                    История тарифов пуста
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

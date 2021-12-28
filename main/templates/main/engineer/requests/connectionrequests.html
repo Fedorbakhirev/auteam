@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Обработка заявок{% endblock %}
+{% block content %}
+    <div class="content">
+        <div class="application">
+            <div class="container">
+                <div class="application__item">.
+
+                    {% if cards %}
+                        <div class="application-title">
+                            Заявки на подключение
+                        </div>
+
+                        <div class="application_inner">
+                            {% for item in cards %}
+                                <div class="application-card">
+                                    <div class="application-card__header">
+                                        <div class="title">
+                                            {{ item.user.first_name }}
+                                        </div>
+                                    </div>
+                                    <div class="text text-tariff">
+                                        Тариф: {{ item.tariff.title }}
+                                    </div>
+                                    <a class="btn btn-orange" href="{% url 'main:request_detail' item.id %}">
+                                        Просмотреть
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="application-title">
+                            Нет заявок на подключение
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

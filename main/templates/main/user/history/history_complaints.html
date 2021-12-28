@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}История жалоб{% endblock %}
+{% block content %}
+    <div class="content">
+        <div class="container">
+            {% if history %}
+                <div class="small-title claim-title">
+                    История жалоб
+                </div>
+            {% else %}
+                <div class="small-title claim-title">
+                    История жалоб пуста
+                </div>
+            {% endif %}
+            <div class="claim-history">
+                {% for complaint in history %}
+                    {% if complaint.status == False %}
+                        <div class="claim-history__item">
+                            <div class="claim-history__item-header">
+                                <div class="date">Жалоба номер {{ complaint.id }} от {{ complaint.created_at }}</div>
+                                <div class="status status-on">На рассмотрении</div>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="claim-history__item">
+                            <div class="claim-history__item-header">
+                                <div class="date">Жалоба номер {{ complaint.id }} от {{ complaint.created_at }}</div>
+                                <div class="status status-off">Рассмотрено</div>
+                            </div>
+
+                            <div class="title">
+                                Ответ инженера {{ complaint.engineer.first_name }}:
+                            </div>
+                            <div class="text">
+                                <p>
+                                    {{ complaint.answer }}
+                                </p>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Заявка №{{ tariff.id }}{% endblock %}
+
+{% block content %}
+    <div class="content">
+        <div class="container">
+
+            <div class="form-request-container">
+                <div class="form-request">
+                    <div class="title">
+                        Заявка №{{ tariff.id }}
+                    </div>
+                    <div class="info">
+                        <div class="from">
+                            Заявку обработал: {{ tariff.engineer.first_name }} {{ tariff.engineer.last_name }}
+                        </div>
+                        <div class="tariff">
+                            Тариф: {{ tariff.tariff.title }}
+                        </div>
+                    </div>
+                    <div class="message-block">
+                        <div class="message-title">
+                            Причина отклонения:
+                        </div>
+                        <div class="message-text">
+                            {{ tariff.desc }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

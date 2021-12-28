@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    Оставить жалобу
+{% endblock %}
+{% block content %}
+    <div class="content">
+
+        <div class="container">
+            <div class="form-message-container">
+                <div class="small-title claim-title">
+                    Оставить жалобу
+                </div>
+
+                <div class="small-desc">
+                    Что-то не так? Оставьте жалобу
+                </div>
+
+                <form action="" class="form-message" method="POST">
+                    {% csrf_token %}
+                    <input type="text" name="subject" id="" placeholder="Тема">
+                    <textarea name="desc" id="" cols="30" rows="8" placeholder="Текст сообщения"></textarea>
+                    <input type="submit" class="btn btn-orange" value="Оставить жалобу">
+                    <p class="error">{{ form.errors }}</p>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

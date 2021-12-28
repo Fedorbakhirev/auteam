@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Обратная связь{% endblock %}
+
+{% block content %}
+    <div class="content">
+        <div class="container">
+            <div class="form-message-container">
+                <div class="small-title claim-title">
+                    Обратная связь
+                </div>
+
+                <div class="small-desc">
+                    Пожалуйста, предоставьте некоторую информацию, чтобы оставить сообщение.
+                </div>
+
+                <form action="" class="form-message" method="POST">
+                    {% csrf_token %}
+                    {% for f in form %}
+                        {{ f }}
+                    {% endfor %}
+                    {% if form.errors %}
+                        {% for f in form %}
+                            <div class="error">{{ f.errors.as_text |cut:"* " }}</div>
+                        {% endfor %}
+                    {% endif %}
+                    <input type="submit" class="btn btn-orange" value="Заказать звонок">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
